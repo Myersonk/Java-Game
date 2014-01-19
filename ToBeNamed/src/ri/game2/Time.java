@@ -2,6 +2,7 @@ package ri.game2;
 
 public class Time {
 	
+	//HI KYLE
 	
 	private static double delta;
 	public static final long SECOND = 1000000000L;
