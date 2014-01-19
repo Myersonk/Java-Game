@@ -5,7 +5,7 @@ public class Game {
 	
 	
 	public Game(){
-		
+		System.out.println("hi");	
 	}
 	
 	public void start(){
