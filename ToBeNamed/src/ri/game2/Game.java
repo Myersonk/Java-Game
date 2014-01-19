@@ -1,5 +1,6 @@
 package ri.game2;
 
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -17,10 +18,9 @@ public class Game extends Canvas implements Runnable {
 
 	public static final int WIDTH = 320;
 	public static final int HEIGHT = WIDTH / 12 * 9;
-	public static final int SCALE = 3;
+	public static final int SCALE = 2;
 	public static final String NAME = "Game";
-	public static final Dimension DIMENSIONS = new Dimension(WIDTH * SCALE,
-			HEIGHT * SCALE);
+	public static final Dimension DIMENSIONS = new Dimension(WIDTH * SCALE,HEIGHT * SCALE);
 	public JFrame frame;
 
 	public Thread thread;
@@ -29,9 +29,21 @@ public class Game extends Canvas implements Runnable {
 	public int tickCount = 0;
 
 	public Game() {
-	}// constructor
+		setMinimumSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
+		setMaximumSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
+		setPreferredSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
+		
+		frame = new JFrame("Game");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(new BorderLayout());
+		frame.add(this,BorderLayout.CENTER);
+		frame.setResizable(false);
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+	}
 
-	public void init() {// all initial monsters are created here
+	public void init() {
 
 	}// end of init
 
@@ -52,6 +64,28 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
+	
+
+	public void tick() {
+
+	}// end of tick
+
+	public void render() {
+
+		BufferStrategy bs = getBufferStrategy();
+		if (bs == null) {
+
+			createBufferStrategy(3);
+			return;
+		}
+
+		Graphics g = bs.getDrawGraphics();
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		g.dispose();
+		bs.show();
+
+	}// end of render
+	
 	public void run() {
 		long lastTime = System.nanoTime();
 		double nsPerTick = 1000000000D / 60D;
@@ -98,25 +132,10 @@ public class Game extends Canvas implements Runnable {
 
 	}// end of run
 
-	public void tick() {
-
-	}// end of tick
-
-	public void render() {
-
-		BufferStrategy bs = getBufferStrategy();
-		if (bs == null) {
-
-			createBufferStrategy(3);
-			return;
-		}
-
-		Graphics g = bs.getDrawGraphics();
-		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-		g.dispose();
-		bs.show();
-
-	}// end of render
+	
+	public static void main(String[] args){
+		new Game().start();
+	}
 
 }// end of class
 
