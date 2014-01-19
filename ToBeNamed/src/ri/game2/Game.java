@@ -1,4 +1,4 @@
-package ri.game;
+package ri.game2;
 
 import java.awt.Canvas;
 import java.awt.Dimension;

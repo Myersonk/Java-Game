@@ -1,4 +1,4 @@
-package ri.game;
+package ri.game2;
 
 public class Time {
 	
