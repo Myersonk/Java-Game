@@ -9,7 +9,7 @@ public class Game {
 	}
 	
 	public void start(){
-		
+		System.out.println("hello");	
 	}
 	
 	
